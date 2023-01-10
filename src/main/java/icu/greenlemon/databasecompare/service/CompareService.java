@@ -36,8 +36,8 @@ public class CompareService {
     private final Map<String, Set<String>> newDataBaseMap = new HashMap<>();
     private final Map<String, Set<String>> oldDataBaseMap = new HashMap<>();
 
-    private final Map<String, Map<String, Map<String,String>>> newTableMap = new HashMap<>();
-    private final Map<String, Map<String, Map<String,String>>> oldTableMap = new HashMap<>();
+    private final Map<String, Map<String, Map<String, String>>> newTableMap = new HashMap<>();
+    private final Map<String, Map<String, Map<String, String>>> oldTableMap = new HashMap<>();
 
     @SneakyThrows
     @PostConstruct
@@ -64,11 +64,11 @@ public class CompareService {
         bothContainsDataBase.forEach(oldDataBaseSet::remove);
         if (!newDataBaseSet.isEmpty()) {
             log.info("新增了数据库↓");
-            newDataBaseSet.forEach(System.out::println);
+            newDataBaseSet.forEach(log::info);
         }
         if (!oldDataBaseSet.isEmpty()) {
             log.info("删除了数据库↓");
-            oldDataBaseSet.forEach(System.out::println);
+            oldDataBaseSet.forEach(log::info);
         }
 
         log.info("==========表判断开始==========");
@@ -89,11 +89,11 @@ public class CompareService {
             bothContainsTableMap.put(dataBase, bothContainsTable);
             if (!newTables.isEmpty()) {
                 log.info(dataBase + "中新增了表↓");
-                newTables.forEach(System.out::println);
+                newTables.forEach(log::info);
             }
             if (!oldTables.isEmpty()) {
                 log.info(dataBase + "中删除了表↓");
-                oldTables.forEach(System.out::println);
+                oldTables.forEach(log::info);
             }
         });
 
@@ -103,17 +103,17 @@ public class CompareService {
             String tableName = key.split("\\.")[1];
             List<String> bothContainsTable = bothContainsTableMap.get(dataBaseName);
             if (null != bothContainsTable && bothContainsTable.contains(tableName)) {
-                Map<String, Map<String,String>> oldFieldMap = oldTableMap.get(key);
+                Map<String, Map<String, String>> oldFieldMap = oldTableMap.get(key);
                 Set<String> keySet = new HashSet<>();
                 keySet.addAll(oldFieldMap.keySet());
                 keySet.addAll(newFieldMap.keySet());
                 keySet.forEach(item -> {
-                    Map<String,String> oldField = oldFieldMap.get(item);
+                    Map<String, String> oldField = oldFieldMap.get(item);
                     if (null == oldField) {
                         log.info(dataBaseName + "的" + tableName + "新增了字段↓" + item);
                         return;
                     }
-                    Map<String,String> newField = newFieldMap.get(item);
+                    Map<String, String> newField = newFieldMap.get(item);
                     if (null == newField) {
                         log.info(dataBaseName + "的" + tableName + "删除了字段↓" + item);
                         return;
@@ -166,10 +166,10 @@ public class CompareService {
             String dataBaseName = newRs.getString("TABLE_CAT");
             String tableName = newRs.getString("TABLE_NAME");
             String fieldName = newRs.getString("COLUMN_NAME");
-            Map<String,String> field = new HashMap<>();
+            Map<String, String> field = new HashMap<>();
             field.put("fieldType", newRs.getString("TYPE_NAME"));
             field.put("fieldSize", newRs.getString("COLUMN_SIZE"));
-            field.put("fieldDigits", newRs.getString("DECIMAL_DIGITS"));
+            field.put("fieldDigits", newRs.getString("DECIMAL_DIGITS") == null ? "" : newRs.getString("DECIMAL_DIGITS"));
             field.put("fieldIsNull", newRs.getString("NULLABLE"));
             field.put("fieldRemarks", newRs.getString("REMARKS"));
             newDataBaseSet.add(dataBaseName);
@@ -182,7 +182,7 @@ public class CompareService {
                 newDataBaseMap.get(dataBaseName).add(tableName);
             }
 
-            Map<String, Map<String,String>> fieldMap = newTableMap.get(dataBaseName + "." + tableName);
+            Map<String, Map<String, String>> fieldMap = newTableMap.get(dataBaseName + "." + tableName);
             if (null == fieldMap) {
                 fieldMap = new HashMap<>();
                 fieldMap.put(fieldName, field);
@@ -198,10 +198,10 @@ public class CompareService {
             String dataBaseName = oldRs.getString("TABLE_CAT");
             String tableName = oldRs.getString("TABLE_NAME");
             String fieldName = oldRs.getString("COLUMN_NAME");
-            Map<String,String> field = new HashMap<>();
+            Map<String, String> field = new HashMap<>();
             field.put("fieldType", oldRs.getString("TYPE_NAME"));
             field.put("fieldSize", oldRs.getString("COLUMN_SIZE"));
-            field.put("fieldDigits", oldRs.getString("DECIMAL_DIGITS"));
+            field.put("fieldDigits", oldRs.getString("DECIMAL_DIGITS") == null ? "" : newRs.getString("DECIMAL_DIGITS"));
             field.put("fieldIsNull", oldRs.getString("NULLABLE"));
             field.put("fieldRemarks", oldRs.getString("REMARKS"));
             oldDataBaseSet.add(dataBaseName);
@@ -214,7 +214,7 @@ public class CompareService {
                 oldDataBaseMap.get(dataBaseName).add(tableName);
             }
 
-            Map<String, Map<String,String>> fieldMap = oldTableMap.get(dataBaseName + "." + tableName);
+            Map<String, Map<String, String>> fieldMap = oldTableMap.get(dataBaseName + "." + tableName);
             if (null == fieldMap) {
                 fieldMap = new HashMap<>();
                 fieldMap.put(fieldName, field);
