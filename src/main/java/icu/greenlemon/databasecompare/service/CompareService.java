@@ -201,7 +201,7 @@ public class CompareService {
             Map<String, String> field = new HashMap<>();
             field.put("fieldType", oldRs.getString("TYPE_NAME"));
             field.put("fieldSize", oldRs.getString("COLUMN_SIZE"));
-            field.put("fieldDigits", oldRs.getString("DECIMAL_DIGITS") == null ? "" : newRs.getString("DECIMAL_DIGITS"));
+            field.put("fieldDigits", oldRs.getString("DECIMAL_DIGITS") == null ? "" : oldRs.getString("DECIMAL_DIGITS"));
             field.put("fieldIsNull", oldRs.getString("NULLABLE"));
             field.put("fieldRemarks", oldRs.getString("REMARKS"));
             oldDataBaseSet.add(dataBaseName);
