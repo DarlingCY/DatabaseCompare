@@ -1,0 +1,10 @@
+#newDataBase
+newDatabase:
+  url:
+  user:
+  pass:
+#oldDataBase
+oldDatabase:
+  url:
+  user:
+  pass:
