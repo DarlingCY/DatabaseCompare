@@ -22,8 +22,8 @@
       user: root #账户
       pass: 123456 #密码
     ```
-3. 在当前解压文件夹中执行如下命令
+3. 在当前解压文件夹中执行如下命令(xxx请替换为jar包名称)
    ```shell
    java -jar xxx.jar --server.port=8120 --spring.config.location=application.yml
    ```
-4. 启动成功后访问http://127.0.0.1:8120即可查看及操作对比结果
+4. 启动成功后访问 http://127.0.0.1:8120 即可查看及操作对比结果
