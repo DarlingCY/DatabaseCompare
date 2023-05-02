@@ -1,10 +1,12 @@
 package icu.greenlemon.databasecompare.bizservice;
 
 import com.alibaba.fastjson2.JSONObject;
+import icu.greenlemon.databasecompare.service.DataService;
 import icu.greenlemon.databasecompare.util.DataUtil;
 import icu.greenlemon.databasecompare.util.R;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -14,6 +16,9 @@ import java.util.*;
  */
 @Service
 public class BizService {
+
+    @Resource
+    private DataService dataService;
 
     public R<JSONObject> getDatabaseDifference() {
         Set<String> newDatabaseSet = new HashSet<>(DataUtil.newDatabaseMap.keySet());
@@ -146,5 +151,10 @@ public class BizService {
             bothContainsTableMap.put(dataBase, bothContainsTable);
         });
         return bothContainsTableMap;
+    }
+
+    public R<Boolean> overloadAndCompare() {
+        dataService.init();
+        return R.ok(true);
     }
 }

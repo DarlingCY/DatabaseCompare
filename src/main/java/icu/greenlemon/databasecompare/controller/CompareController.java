@@ -1,10 +1,10 @@
 package icu.greenlemon.databasecompare.controller;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import icu.greenlemon.databasecompare.bizservice.BizService;
 import icu.greenlemon.databasecompare.util.R;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,5 +36,10 @@ public class CompareController {
     @GetMapping("/getFieldDifference")
     public R<List<JSONObject>> getFieldDifference(){
         return bizService.getFieldDifference();
+    }
+
+    @PostMapping("/overloadAndCompare")
+    public R<Boolean> overloadAndCompare(){
+        return bizService.overloadAndCompare();
     }
 }
