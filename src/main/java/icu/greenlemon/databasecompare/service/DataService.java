@@ -3,12 +3,12 @@ package icu.greenlemon.databasecompare.service;
 import icu.greenlemon.databasecompare.util.DataUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -36,6 +36,13 @@ public class DataService {
     @SneakyThrows
     @PostConstruct
     public void init() {
+        //校验配置信息完整性
+        checkConfig();
+        //清空存储
+        DataUtil.newDatabaseMap.clear();
+        DataUtil.oldDatabaseMap.clear();
+        DataUtil.newTableMap.clear();
+        DataUtil.oldTableMap.clear();
         log.info("开始读取元数据");
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection newDatabaseConnection = DriverManager.getConnection(newDatabaseUrl, newDatabaseUser, newDatabasePass);
@@ -116,6 +123,12 @@ public class DataService {
                     DataUtil.oldTableMap.get(dataBaseName + "." + tableName).put(fieldName, field);
                 }
             }
+        }
+    }
+
+    private void checkConfig() {
+        if (StringUtils.isBlank(newDatabaseUrl) || StringUtils.isBlank(newDatabaseUser) || StringUtils.isBlank(newDatabasePass) || StringUtils.isBlank(oldDatabaseUrl) || StringUtils.isBlank(oldDatabaseUser) || StringUtils.isBlank(oldDatabasePass)) {
+            throw new RuntimeException("配置信息不完整，请检查配置信息");
         }
     }
 }
