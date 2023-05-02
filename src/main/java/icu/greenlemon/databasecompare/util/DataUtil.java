@@ -10,11 +10,6 @@ import java.util.*;
 public class DataUtil {
     public static final Map<String, Set<String>> newDatabaseMap = new HashMap<>();
     public static final Map<String, Set<String>> oldDatabaseMap = new HashMap<>();
-
     public static final Map<String, Map<String, Map<String, String>>> newTableMap = new HashMap<>();
     public static final Map<String, Map<String, Map<String, String>>> oldTableMap = new HashMap<>();
-
-//    public static final List<String> bothContainsDatabase = new ArrayList<>();
-//    public static final Map<String, List<String>> bothContainsTableMap = new HashMap<>();
-
 }
