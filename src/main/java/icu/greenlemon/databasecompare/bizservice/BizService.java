@@ -21,8 +21,8 @@ public class BizService {
     private DataService dataService;
 
     public R<JSONObject> getDatabaseDifference() {
-        Set<String> newDatabaseSet = new HashSet<>(DataUtil.newDatabaseMap.keySet());
-        Set<String> oldDatabaseSet = new HashSet<>(DataUtil.oldDatabaseMap.keySet());
+        Set<String> newDatabaseSet = new HashSet<>(DataUtil.newDatabaseData.getDatabaseMap().keySet());
+        Set<String> oldDatabaseSet = new HashSet<>(DataUtil.oldDatabaseData.getDatabaseMap().keySet());
         List<String> bothContainsDatabase = getBothContainsDatabase(newDatabaseSet, oldDatabaseSet);
         bothContainsDatabase.forEach(newDatabaseSet::remove);
         bothContainsDatabase.forEach(oldDatabaseSet::remove);
@@ -34,16 +34,16 @@ public class BizService {
     }
 
     public R<List<JSONObject>> getTableDifference() {
-        Set<String> newDatabaseSet = new HashSet<>(DataUtil.newDatabaseMap.keySet());
-        Set<String> oldDatabaseSet = new HashSet<>(DataUtil.oldDatabaseMap.keySet());
+        Set<String> newDatabaseSet = new HashSet<>(DataUtil.newDatabaseData.getDatabaseMap().keySet());
+        Set<String> oldDatabaseSet = new HashSet<>(DataUtil.oldDatabaseData.getDatabaseMap().keySet());
         List<String> bothContainsDatabase = getBothContainsDatabase(newDatabaseSet, oldDatabaseSet);
         Map<String, List<String>> bothContainsTableMap = getBothContainsTableMap();
         List<JSONObject> resultList = new ArrayList<>();
         bothContainsDatabase.forEach(dataBase -> {
             //共同拥有的表
             List<String> bothContainsTable = bothContainsTableMap.get(dataBase);
-            Set<String> newTables = new HashSet<>(DataUtil.newDatabaseMap.get(dataBase));
-            Set<String> oldTables = new HashSet<>(DataUtil.oldDatabaseMap.get(dataBase));
+            Set<String> newTables = new HashSet<>(DataUtil.newDatabaseData.getDatabaseMap().get(dataBase));
+            Set<String> oldTables = new HashSet<>(DataUtil.oldDatabaseData.getDatabaseMap().get(dataBase));
             bothContainsTable.forEach(newTables::remove);
             bothContainsTable.forEach(oldTables::remove);
             if (newTables.isEmpty() && oldTables.isEmpty()) {
@@ -67,8 +67,8 @@ public class BizService {
                 List<JSONObject> addedFieldList = new ArrayList<>();
                 List<JSONObject> deletedFieldList = new ArrayList<>();
                 List<JSONObject> updateFieldList = new ArrayList<>();
-                Map<String, Map<String, String>> newFieldMap = new HashMap<>(DataUtil.newTableMap.get(dataBaseName + "." + table));
-                Map<String, Map<String, String>> oldFieldMap = new HashMap<>(DataUtil.oldTableMap.get(dataBaseName + "." + table));
+                Map<String, Map<String, String>> newFieldMap = new HashMap<>(DataUtil.newDatabaseData.getTableMap().get(dataBaseName + "." + table));
+                Map<String, Map<String, String>> oldFieldMap = new HashMap<>(DataUtil.oldDatabaseData.getTableMap().get(dataBaseName + "." + table));
                 Set<String> keySet = new HashSet<>();
                 keySet.addAll(oldFieldMap.keySet());
                 keySet.addAll(newFieldMap.keySet());
@@ -137,12 +137,12 @@ public class BizService {
         //数据库_数据表
         Map<String, List<String>> bothContainsTableMap = new HashMap<>();
         //共同拥有的库
-        List<String> bothContainsDatabase = getBothContainsDatabase(new HashSet<>(DataUtil.newDatabaseMap.keySet()), new HashSet<>(DataUtil.oldDatabaseMap.keySet()));
+        List<String> bothContainsDatabase = getBothContainsDatabase(new HashSet<>(DataUtil.newDatabaseData.getDatabaseMap().keySet()), new HashSet<>(DataUtil.newDatabaseData.getDatabaseMap().keySet()));
         bothContainsDatabase.forEach(dataBase -> {
             //共同拥有的表
             List<String> bothContainsTable = new ArrayList<>();
-            Set<String> newTables = new HashSet<>(DataUtil.newDatabaseMap.get(dataBase));
-            Set<String> oldTables = new HashSet<>(DataUtil.oldDatabaseMap.get(dataBase));
+            Set<String> newTables = new HashSet<>(DataUtil.newDatabaseData.getDatabaseMap().get(dataBase));
+            Set<String> oldTables = new HashSet<>(DataUtil.oldDatabaseData.getDatabaseMap().get(dataBase));
             newTables.forEach(table -> {
                 if (oldTables.contains(table)) {
                     bothContainsTable.add(table);
