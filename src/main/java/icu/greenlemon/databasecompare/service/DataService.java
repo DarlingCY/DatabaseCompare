@@ -1,5 +1,6 @@
 package icu.greenlemon.databasecompare.service;
 
+import icu.greenlemon.databasecompare.entity.DatabaseData;
 import icu.greenlemon.databasecompare.util.DataUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -38,11 +39,6 @@ public class DataService {
     public void init() {
         //校验配置信息完整性
         checkConfig();
-        //清空存储
-        DataUtil.newDatabaseMap.clear();
-        DataUtil.oldDatabaseMap.clear();
-        DataUtil.newTableMap.clear();
-        DataUtil.oldTableMap.clear();
         log.info("开始读取元数据");
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection newDatabaseConnection = DriverManager.getConnection(newDatabaseUrl, newDatabaseUser, newDatabasePass);
@@ -50,16 +46,19 @@ public class DataService {
         DatabaseMetaData newMetaData = newDatabaseConnection.getMetaData();
         DatabaseMetaData oldMetaData = oldDatabaseConnection.getMetaData();
         //读取元数据
-        getData(newMetaData, oldMetaData);
+        DataUtil.newDatabaseData = getData(newMetaData);
+        DataUtil.oldDatabaseData = getData(oldMetaData);
         //数据处理
         log.info("元数据处理完成");
         newDatabaseConnection.close();
         oldDatabaseConnection.close();
     }
 
-    private void getData(DatabaseMetaData newDbMetaData, DatabaseMetaData oldDbMetaData) throws SQLException {
+    private DatabaseData getData(DatabaseMetaData databaseMetaData) throws SQLException {
         //从元数据中获取到所有的表名
-        ResultSet newRs = newDbMetaData.getColumns(null, "%", "%", "%");
+        Map<String,Set<String>> databaseMap=new HashMap<>();
+        Map<String, Map<String, Map<String, String>>> tableMap=new HashMap<>();
+        ResultSet newRs = databaseMetaData.getColumns(null, "%", "%", "%");
         while (newRs.next()) {
             String dataBaseName = newRs.getString("TABLE_CAT");
             if (!excludeDatabase.contains(dataBaseName)) {
@@ -72,58 +71,29 @@ public class DataService {
                 field.put("fieldIsNull", newRs.getString("NULLABLE"));
                 field.put("fieldRemarks", newRs.getString("REMARKS"));
                 field.put("fieldName", fieldName);
-                Set<String> tables = DataUtil.newDatabaseMap.get(dataBaseName);
+                Set<String> tables = databaseMap.get(dataBaseName);
                 if (null == tables) {
                     tables = new HashSet<>();
                     tables.add(tableName);
-                    DataUtil.newDatabaseMap.put(dataBaseName, tables);
+                    databaseMap.put(dataBaseName, tables);
                 } else {
-                    DataUtil.newDatabaseMap.get(dataBaseName).add(tableName);
+                    databaseMap.get(dataBaseName).add(tableName);
                 }
 
-                Map<String, Map<String, String>> fieldMap = DataUtil.newTableMap.get(dataBaseName + "." + tableName);
+                Map<String, Map<String, String>> fieldMap = tableMap.get(dataBaseName + "." + tableName);
                 if (null == fieldMap) {
                     fieldMap = new HashMap<>();
                     fieldMap.put(fieldName, field);
-                    DataUtil.newTableMap.put(dataBaseName + "." + tableName, fieldMap);
+                    tableMap.put(dataBaseName + "." + tableName, fieldMap);
                 } else {
-                    DataUtil.newTableMap.get(dataBaseName + "." + tableName).put(fieldName, field);
+                    tableMap.get(dataBaseName + "." + tableName).put(fieldName, field);
                 }
             }
         }
-
-        //从元数据中获取到所有的表名
-        ResultSet oldRs = oldDbMetaData.getColumns(null, "%", "%", "%");
-        while (oldRs.next()) {
-            String dataBaseName = oldRs.getString("TABLE_CAT");
-            if (!excludeDatabase.contains(dataBaseName)) {
-                String tableName = oldRs.getString("TABLE_NAME");
-                String fieldName = oldRs.getString("COLUMN_NAME");
-                Map<String, String> field = new HashMap<>();
-                field.put("fieldType", oldRs.getString("TYPE_NAME"));
-                field.put("fieldSize", oldRs.getString("COLUMN_SIZE"));
-                field.put("fieldDigits", oldRs.getString("DECIMAL_DIGITS") == null ? "" : oldRs.getString("DECIMAL_DIGITS"));
-                field.put("fieldIsNull", oldRs.getString("NULLABLE"));
-                field.put("fieldRemarks", oldRs.getString("REMARKS"));
-                field.put("fieldName", fieldName);
-                Set<String> tables = DataUtil.oldDatabaseMap.get(dataBaseName);
-                if (null == tables) {
-                    tables = new HashSet<>();
-                    tables.add(tableName);
-                    DataUtil.oldDatabaseMap.put(dataBaseName, tables);
-                } else {
-                    DataUtil.oldDatabaseMap.get(dataBaseName).add(tableName);
-                }
-                Map<String, Map<String, String>> fieldMap = DataUtil.oldTableMap.get(dataBaseName + "." + tableName);
-                if (null == fieldMap) {
-                    fieldMap = new HashMap<>();
-                    fieldMap.put(fieldName, field);
-                    DataUtil.oldTableMap.put(dataBaseName + "." + tableName, fieldMap);
-                } else {
-                    DataUtil.oldTableMap.get(dataBaseName + "." + tableName).put(fieldName, field);
-                }
-            }
-        }
+        DatabaseData databaseData=new DatabaseData();
+        databaseData.setDatabaseMap(databaseMap)
+                .setTableMap(tableMap);
+        return databaseData;
     }
 
     private void checkConfig() {
