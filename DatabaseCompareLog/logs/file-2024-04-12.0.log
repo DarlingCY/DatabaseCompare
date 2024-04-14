@@ -1,0 +1,38 @@
+2024-04-12 17:12:42,594 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       55    -Starting DatabaseCompareApplication using Java 1.8.0_302 on GreenLemon with PID 36468 (C:\Users\33091\IdeaProjects\DatabaseCompare\target\classes started by 33091 in C:\Users\33091\IdeaProjects\DatabaseCompare) 
+2024-04-12 17:12:42,597 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       634   -No active profile set, falling back to 1 default profile: "default" 
+2024-04-12 17:13:40,020 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       55    -Starting DatabaseCompareApplication using Java 1.8.0_302 on GreenLemon with PID 46604 (C:\Users\33091\IdeaProjects\DatabaseCompare\target\classes started by 33091 in C:\Users\33091\IdeaProjects\DatabaseCompare) 
+2024-04-12 17:13:40,023 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       634   -No active profile set, falling back to 1 default profile: "default" 
+2024-04-12 17:13:40,588 [main] INFO  icu.greenlemon.databasecompare.service.DataService              67    -开始读取元数据 
+2024-04-12 17:14:29,716 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       55    -Starting DatabaseCompareApplication using Java 1.8.0_302 on GreenLemon with PID 39744 (C:\Users\33091\IdeaProjects\DatabaseCompare\target\classes started by 33091 in C:\Users\33091\IdeaProjects\DatabaseCompare) 
+2024-04-12 17:14:29,717 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       634   -No active profile set, falling back to 1 default profile: "default" 
+2024-04-12 17:14:30,296 [main] INFO  icu.greenlemon.databasecompare.service.DataService              67    -开始读取元数据 
+2024-04-12 17:16:48,332 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       55    -Starting DatabaseCompareApplication using Java 1.8.0_302 on GreenLemon with PID 43744 (C:\Users\33091\IdeaProjects\DatabaseCompare\target\classes started by 33091 in C:\Users\33091\IdeaProjects\DatabaseCompare) 
+2024-04-12 17:16:48,335 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       634   -No active profile set, falling back to 1 default profile: "default" 
+2024-04-12 17:16:48,898 [main] INFO  icu.greenlemon.databasecompare.service.DataService              67    -开始读取元数据 
+2024-04-12 17:17:09,259 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       55    -Starting DatabaseCompareApplication using Java 1.8.0_302 on GreenLemon with PID 46524 (C:\Users\33091\IdeaProjects\DatabaseCompare\target\classes started by 33091 in C:\Users\33091\IdeaProjects\DatabaseCompare) 
+2024-04-12 17:17:09,262 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       634   -No active profile set, falling back to 1 default profile: "default" 
+2024-04-12 17:17:09,937 [main] INFO  icu.greenlemon.databasecompare.service.DataService              67    -开始读取元数据 
+2024-04-12 17:18:22,018 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       55    -Starting DatabaseCompareApplication using Java 1.8.0_302 on GreenLemon with PID 40228 (C:\Users\33091\IdeaProjects\DatabaseCompare\target\classes started by 33091 in C:\Users\33091\IdeaProjects\DatabaseCompare) 
+2024-04-12 17:18:22,020 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       634   -No active profile set, falling back to 1 default profile: "default" 
+2024-04-12 17:18:22,585 [main] INFO  icu.greenlemon.databasecompare.service.DataService              67    -开始读取元数据 
+2024-04-12 17:18:23,811 [main] INFO  icu.greenlemon.databasecompare.service.DataService              93    -开始读取新数据库元数据 
+2024-04-12 17:18:44,394 [main] INFO  icu.greenlemon.databasecompare.service.DataService              102   -元数据处理完成 
+2024-04-12 17:18:44,574 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       61    -Started DatabaseCompareApplication in 22.787 seconds (JVM running for 23.389) 
+2024-04-12 20:32:23,843 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       55    -Starting DatabaseCompareApplication using Java 1.8.0_302 on GreenLemon with PID 17444 (C:\Users\33091\IdeaProjects\DatabaseCompare\target\classes started by 33091 in C:\Users\33091\IdeaProjects\DatabaseCompare) 
+2024-04-12 20:32:23,846 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       634   -No active profile set, falling back to 1 default profile: "default" 
+2024-04-12 20:32:24,520 [main] INFO  icu.greenlemon.databasecompare.service.DataService              67    -开始读取元数据 
+2024-04-12 20:32:26,342 [main] INFO  icu.greenlemon.databasecompare.service.DataService              93    -开始读取新数据库元数据 
+2024-04-12 20:32:47,847 [main] INFO  icu.greenlemon.databasecompare.service.DataService              102   -元数据处理完成 
+2024-04-12 20:32:48,046 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       61    -Started DatabaseCompareApplication in 24.487 seconds (JVM running for 25.191) 
+2024-04-12 21:43:06,891 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       55    -Starting DatabaseCompareApplication using Java 1.8.0_302 on GreenLemon with PID 228 (C:\Users\33091\IdeaProjects\DatabaseCompare\target\classes started by 33091 in C:\Users\33091\IdeaProjects\DatabaseCompare) 
+2024-04-12 21:43:06,893 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       634   -No active profile set, falling back to 1 default profile: "default" 
+2024-04-12 21:43:07,530 [main] INFO  icu.greenlemon.databasecompare.service.DataService              67    -开始读取元数据 
+2024-04-12 21:43:08,964 [main] INFO  icu.greenlemon.databasecompare.service.DataService              93    -开始读取新数据库元数据 
+2024-04-12 21:43:30,150 [main] INFO  icu.greenlemon.databasecompare.service.DataService              102   -元数据处理完成 
+2024-04-12 21:43:30,345 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       61    -Started DatabaseCompareApplication in 23.712 seconds (JVM running for 24.382) 
+2024-04-12 22:16:21,847 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       55    -Starting DatabaseCompareApplication using Java 1.8.0_302 on GreenLemon with PID 26400 (C:\Users\33091\IdeaProjects\DatabaseCompare\target\classes started by 33091 in C:\Users\33091\IdeaProjects\DatabaseCompare) 
+2024-04-12 22:16:21,849 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       634   -No active profile set, falling back to 1 default profile: "default" 
+2024-04-12 22:16:22,439 [main] INFO  icu.greenlemon.databasecompare.service.DataService              67    -开始读取元数据 
+2024-04-12 22:16:24,398 [main] INFO  icu.greenlemon.databasecompare.service.DataService              93    -开始读取新数据库元数据 
+2024-04-12 22:16:45,451 [main] INFO  icu.greenlemon.databasecompare.service.DataService              102   -元数据处理完成 
+2024-04-12 22:16:45,614 [main] INFO  icu.greenlemon.databasecompare.DatabaseCompareApplication       61    -Started DatabaseCompareApplication in 24.0 seconds (JVM running for 24.565) 

@@ -1,10 +1,22 @@
-#newDataBase
-newDatabase:
-  url:
+server:
+  port: 8888
+sourceDatabase:
+  host:
+  port:
   user:
-  pass:
-#oldDataBase
-oldDatabase:
-  url:
+  password:
+  useSshTunnel:
+  sshHost:
+  sshPort:
+  sshUser:
+  sshPassword:
+targetDatabase:
+  host:
+  port:
   user:
-  pass:
+  password:
+  useSshTunnel:
+  sshHost:
+  sshPort:
+  sshUser:
+  sshPassword:

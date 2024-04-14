@@ -1,45 +1,44 @@
 package icu.greenlemon.databasecompare.controller;
 
-import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 import icu.greenlemon.databasecompare.bizservice.BizService;
+import icu.greenlemon.databasecompare.service.DataService;
 import icu.greenlemon.databasecompare.util.R;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
 
-/**
- * @ClassName: CompareController
- * @Author: ChenYue
- * @Date: 2023/04/24
- */
 @RestController
+@CrossOrigin
 @RequestMapping("/compare")
 public class CompareController {
 
     @Resource
     private BizService bizService;
+    @Resource
+    private DataService dataService;
 
-    @GetMapping("/getDatabaseDifference")
-    public R<JSONObject> getDatabaseDifference(){
-        return bizService.getDatabaseDifference();
+    @GetMapping("/reloadCompare")
+    public R<Boolean> reload() {
+        dataService.init();
+        return R.ok(true);
     }
 
-    @GetMapping("/getTableDifference")
-    public R<List<JSONObject>> getTableDifference(){
-        return bizService.getTableDifference();
+    @GetMapping("/queryDatabase")
+    public R<JSONObject> queryDatabase() {
+        return bizService.queryDatabase();
     }
 
-    @GetMapping("/getFieldDifference")
-    public R<List<JSONObject>> getFieldDifference(){
-        return bizService.getFieldDifference();
+    @GetMapping("/queryTable")
+    public R<JSONObject> queryTable() {
+        return bizService.queryTable();
     }
 
-    @PostMapping("/overloadAndCompare")
-    public R<Boolean> overloadAndCompare(){
-        return bizService.overloadAndCompare();
+    @GetMapping("/queryField")
+    public R<JSONObject> queryField() {
+        return bizService.queryField();
     }
 }
