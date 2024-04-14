@@ -13,19 +13,31 @@
 1. 前往[releases](https://github.com/DarlingCY/DatabaseCompare/releases)页面下载最新包并解压到任意文件夹
 2. 编辑application.yml文件，如下示例所示
     ```yml
-    #newDataBase 新版本数据库
-    newDatabase:
-      url: jdbc:mysql://127.0.0.1:3306 #修改为自己的数据库连接地址
-      user: root #账户
-      pass: 123456 #密码
-    #oldDataBase 旧版本数据库
-    oldDatabase:
-      url: jdbc:mysql://127.0.0.1:3306 #修改为自己的数据库连接地址
-      user: root #账户
-      pass: 123456 #密码
+   #源数据库
+   sourceDatabase:
+      host: #数据库HOST
+      port: #数据库PORT
+      user: #数据库USER
+      password: #数据库PASSWORD
+      useSshTunnel: #是否使用SSH隧道
+      sshHost: #SSH隧道HOST
+      sshPort: #SSH隧道PORT
+      sshUser: #SSH隧道USER
+      sshPassword: #SSH隧道PASSWORD
+   #目标数据库
+   targetDatabase:
+      host: #数据库HOST
+      port: #数据库PORT
+      user: #数据库USER
+      password: #数据库PASSWORD
+      useSshTunnel: #是否使用SSH隧道
+      sshHost: #SSH隧道HOST
+      sshPort: #SSH隧道PORT
+      sshUser: #SSH隧道USER
+      sshPassword: #SSH隧道PASSWORD
     ```
-3. 在当前解压文件夹中执行如下命令(xxx请替换为jar包名称)
+3. 在当前解压文件夹中执行如下命令
    ```shell
-   java -jar xxx.jar --server.port=8120 --spring.config.location=application.yml
+   java -jar DatabaseCompare.jar
    ```
-4. 启动成功后访问 http://127.0.0.1:8120 即可查看及操作对比结果
+4. 启动成功后访问 http://127.0.0.1:8888 即可查看及操作对比结果
